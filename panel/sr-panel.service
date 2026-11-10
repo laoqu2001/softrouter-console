@@ -1,0 +1,14 @@
+[Unit]
+Description=Softrouter panel (mobile web UI on 5500)
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /usr/local/bin/softrouter-panel-v3.py
+Restart=always
+RestartSec=3
+StandardOutput=append:/var/log/sr-panel.out
+StandardError=append:/var/log/sr-panel.out
+
+[Install]
+WantedBy=multi-user.target
