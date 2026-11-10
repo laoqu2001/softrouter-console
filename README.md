@@ -65,4 +65,4 @@ systemctl enable --now sr-desktop.service
 
 ## 许可
 
-可以下载、部署、自用。**未经许可不得修改后分发或用于商业转售。**
+MIT License —— 可以自由使用、修改、部署到你自己的环境。详见 [LICENSE](LICENSE)。
