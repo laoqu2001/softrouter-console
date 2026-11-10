@@ -1,0 +1,23 @@
+[Unit]
+Description=SUNIP desktop console on HTTPS port 5510
+After=network.target sr-panel.service
+Wants=sr-panel.service
+
+[Service]
+Type=simple
+DynamicUser=yes
+WorkingDirectory=/usr/local/share/sr-desktop
+LoadCredential=desktop-cert:/etc/dl-ssl/fullchain.pem
+LoadCredential=desktop-key:/etc/dl-ssl/privkey.pem
+ExecStart=/usr/bin/python3 /usr/local/bin/softrouter-desktop.py --bind 0.0.0.0 --port 5510 --assets /usr/local/share/sr-desktop --upstream https://127.0.0.1:5500 --cert ${CREDENTIALS_DIRECTORY}/desktop-cert --key ${CREDENTIALS_DIRECTORY}/desktop-key
+Restart=on-failure
+RestartSec=3
+UMask=0077
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+
+[Install]
+WantedBy=multi-user.target
